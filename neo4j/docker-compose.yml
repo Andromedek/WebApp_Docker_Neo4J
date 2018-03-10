@@ -1,0 +1,18 @@
+web:
+  build: ./web
+  ports:
+   - "5000:5000"
+  volumes:          ## adds app folder to the container
+   - .:/app
+  links:            ## connects neo4j to app container
+   - neo4j
+  working_dir: /app         ## uses work dir /app
+  entrypoint: python app.py   ## starts application
+
+neo4j:
+    image: neo4j:3.0
+    ports:
+    - "17474:7474"
+    volumes:
+    - /home/kahina/Bureau/lab/data:/data
+    - /home/kahina/Bureau/lab/logs:/logs 
